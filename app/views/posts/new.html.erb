@@ -1,6 +1,10 @@
 <%= form_with(model: @post, local: true) do |f|%>
   <%= render "shared/error_messages", model: f.object %>
-  <%= f.text_area :title, placeholder: "タイトルを入力" %>
-  <%= f.text_field :description, placeholder: "説明を入力" %>
+  <%= f.label :video %>
+  <%= f.file_field :video %>
+  <%= f.text_field :title, placeholder: "タイトルを入力" %>
+  <%= f.text_area :description, placeholder: "説明を入力" %>
   <%= f.submit "送信" %>
 <% end %>
+
+<%# direct_upload: true これはf.file_fieldに追記する。ストレージサービスを使うときにこれで先にストレージサービスにアップロードされる %>
