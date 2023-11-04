@@ -1,2 +1,6 @@
 <h1>Posts#index</h1>
 <p>Find me in app/views/posts/index.html.erb</p>
+<p><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></p>
+<p><%= link_to "ログイン", new_user_session_path %></p>
+<p><%= link_to "新規登録", new_user_registration_path %></p>
+
