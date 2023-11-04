@@ -4,6 +4,7 @@
   <%= f.file_field :video %>
   <%= f.text_field :title, placeholder: "タイトルを入力" %>
   <%= f.text_area :description, placeholder: "説明を入力" %>
+  <%= f.collection_select(:industry_id, Industry.all, :id, :name, {}) %>
   <%= f.submit "送信" %>
 <% end %>
 
