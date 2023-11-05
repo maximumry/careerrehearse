@@ -1,6 +1,13 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
 <p><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></p>
 <p><%= link_to "ログイン", new_user_session_path %></p>
 <p><%= link_to "新規登録", new_user_registration_path %></p>
+<p><%= link_to "新規投稿", new_post_path %>
 
+<% @posts.each do |post| %>
+  <% if post.video.attached? %>
+    <p><%= video_tag(rails_blob_path(post.video), controls: true, style: "max-width: 500px;") %></p>
+  <% end %>
+  <p><%= post.title %></p>
+  <p><%= post.description %></p>
+  <p><%= post.industry.name %>
+<% end %>
