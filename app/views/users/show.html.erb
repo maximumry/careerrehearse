@@ -1,0 +1,34 @@
+<%= @user.username %>
+  <% if current_user != @user %>
+    <% if @user.followed_by?(current_user) %>
+      <%=link_to "フォロー中", user_relationships_path(@user.id), data: { turbo_method: :delete } %>
+    <% else %>
+      <%=link_to "フォローする", user_relationships_path(@user.id), data: { turbo_method: :post } %>
+    <% end %>
+  <% end %>
+  <h3>フォロー</h3>
+    <% @user.followings.each do |user| %>
+      <p><%= link_to user.username, user_path(user.id) %></p>
+    <% end %>
+  <h3>フォロワー</h3>
+    <% @user.followers.each do |user| %>
+      <p><%= link_to user.username, user_path(user.id) %></p>
+    <% end %>
+<% @user.posts.each do |post| %>
+  <% if post.video.attached? %>
+    <p><%= video_tag(rails_blob_path(post.video), controls: true, style: "max-width: 500px;") %></p>
+  <% end %>
+  <p><%= post.title %></p>
+  <p><%= post.description %></p>
+  <p><%= post.industry.name %></p>
+  <p><%= link_to "詳細", post_path(post.id), data: { turbo: false } %></p>
+  <div id="like-btn<%= post.id %>">
+    <%= turbo_frame_tag dom_id(post, :like) do %>
+      <% if user_signed_in? && post.liked_by?(current_user)%>
+        <%=link_to "いいね済", post_likes_path(post.id), data: { turbo_method: :delete } %>
+      <% else %>
+        <%=link_to "いいね", post_likes_path(post.id), data: { turbo_method: :post } %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
