@@ -9,5 +9,6 @@
   <% end %>
   <p><%= post.title %></p>
   <p><%= post.description %></p>
-  <p><%= post.industry.name %>
+  <p><%= post.industry.name %></p>
+  <p><%= link_to "詳細", post_path(post.id) %></p>
 <% end %>
