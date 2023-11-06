@@ -1,0 +1,6 @@
+<% if @post.video.attached? %>
+    <p><%= video_tag(rails_blob_path(@post.video), controls: true, style: "max-width: 500px;") %></p>
+  <% end %>
+  <p><%= @post.title %></p>
+  <p><%= @post.description %></p>
+  <p><%= @post.industry.name %></p>
