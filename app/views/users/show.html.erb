@@ -1,4 +1,9 @@
 <%= @user.username %>
+<% if @user.followed_by?(current_user) %>
+  <%=link_to "フォロー中", user_relationships_path(@user.id), data: { turbo_method: :delete } %>
+<% else %>
+  <%=link_to "フォローする", user_relationships_path(@user.id), data: { turbo_method: :post } %>
+<% end %>
 <% @user.posts.each do |post| %>
   <% if post.video.attached? %>
     <p><%= video_tag(rails_blob_path(post.video), controls: true, style: "max-width: 500px;") %></p>
