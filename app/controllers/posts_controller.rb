@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :user_match, only: :edit
+  before_action :user_match, only: [:edit, :destroy]
   def index
     @posts = Post.order("created_at DESC")
   end
@@ -33,6 +33,12 @@ class PostsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to post_path(@post.id)
   end
 
   private
