@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  has_many :comments
   belongs_to :industry
   belongs_to :user
   has_one_attached :video

@@ -6,3 +6,17 @@
   <p><%= @post.industry.name %></p>
   <p><%= link_to "投稿の編集", edit_post_path(@post.id) %></p>
   <p><%= link_to "投稿の削除", post_path(@post.id), data: { turbo_method: :delete } %></p>
+
+  <div>
+    <% if user_signed_in? %>
+      <%= form_with(model: [@post, @comment], local: true) do |f| %>
+        <%= f.text_area :content, placeholder: "コメントする", rows: "2" %>
+        <%= f.submit "送信" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <% @comments.each do |comment| %>
+      <%= comment.user.username %>
+      <%= comment.content %>
+    <% end %>
