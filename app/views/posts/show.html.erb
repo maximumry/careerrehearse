@@ -7,13 +7,13 @@
   <p><%= link_to "投稿の編集", edit_post_path(@post.id) %></p>
   <p><%= link_to "投稿の削除", post_path(@post.id), data: { turbo_method: :delete } %></p>
   <div id="like-btn<%= @post.id %>">
-      <%= turbo_frame_tag dom_id(@post, :like) do %>
-        <% if user_signed_in? && @post.liked_by?(current_user)%>
-          <%=link_to "いいね済", post_likes_path(@post.id), data: { turbo_method: :delete }, class: "btn btn-success", style: "text-decoration: none;", placeholder: "いいね済" %>
-        <% else %>
-          <%=link_to "いいね", post_likes_path(@post.id), data: { turbo_method: :post }, class: "btn btn-outline-success", style: "text-decoration: none;", placeholder: "いいね" %>
-        <% end %>
+    <%= turbo_frame_tag dom_id(@post, :like) do %>
+      <% if user_signed_in? && @post.liked_by?(current_user)%>
+        <%=link_to "いいね済", post_likes_path(@post.id), data: { turbo_method: :delete } %>
+      <% else %>
+        <%=link_to "いいね", post_likes_path(@post.id), data: { turbo_method: :post } %>
       <% end %>
+    <% end %>
   </div>
 
   <div>
