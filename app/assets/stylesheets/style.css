@@ -53,6 +53,17 @@ header p a {
   border-radius: 5px;
 }
 
+.post-title {
+  text-align: center;
+}
+
+.industry {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #007bff;
+  margin: 10px 0;
+}
+
 .post video {
   width: 100%;
   max-width: 100%;
