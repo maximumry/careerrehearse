@@ -1,23 +1,31 @@
-<p><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></p>
-<p><%= link_to "ログイン", new_user_session_path %></p>
-<p><%= link_to "新規登録", new_user_registration_path %></p>
-<p><%= link_to "新規投稿", new_post_path %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
 
-<% @posts.each do |post| %>
-  <% if post.video.attached? %>
-    <p><%= video_tag(rails_blob_path(post.video), controls: true, style: "max-width: 500px;") %></p>
-  <% end %>
-  <p><%= post.title %></p>
-  <p><%= post.description %></p>
-  <p><%= post.industry.name %></p>
-  <p><%= link_to "詳細", post_path(post.id), data: { turbo: false } %></p>
-  <div id="like-btn<%= post.id %>">
-    <%= turbo_frame_tag dom_id(post, :like) do %>
-      <% if user_signed_in? && post.liked_by?(current_user)%>
-        <%=link_to "いいね済", post_likes_path(post.id), data: { turbo_method: :delete } %>
-      <% else %>
-        <%=link_to "いいね", post_likes_path(post.id), data: { turbo_method: :post } %>
+<header>
+  <p><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></p>
+  <p><%= link_to "ログイン", new_user_session_path %></p>
+  <p><%= link_to "新規登録", new_user_registration_path %></p>
+  <p><%= link_to "新規投稿", new_post_path %></p>
+</header>
+
+<div class="post-container">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <% if post.video.attached? %>
+        <p><%= video_tag(rails_blob_path(post.video), controls: true) %></p>
       <% end %>
-    <% end %>
-  </div>
-<% end %>
+      <h2><%= post.title %></h2>
+      <p><%= post.description %></p>
+      <p><%= post.industry.name %></p>
+      <p><%= link_to "詳細", post_path(post.id), data: { turbo: false } %></p>
+      <div id="like-btn<%= post.id %>" class="like-btn">
+        <%= turbo_frame_tag dom_id(post, :like) do %>
+          <% if user_signed_in? && post.liked_by?(current_user) %>
+            <%= link_to "いいね済", post_likes_path(post.id), data: { turbo_method: :delete } %>
+          <% else %>
+            <%= link_to "いいね", post_likes_path(post.id), data: { turbo_method: :post } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
