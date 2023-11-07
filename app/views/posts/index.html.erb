@@ -18,7 +18,7 @@
       <% end %>
       <h2 class="post-title"><%= post.title %></h2>
       <p><%= post.description %></p>
-      <p><%= post.industry.name %></p>
+      <p class="industry"><%= post.industry.name %></p>
       <p><%= link_to "詳細", post_path(post.id), data: { turbo: false } %></p>
       <div id="like-btn<%= post.id %>" class="like-btn">
         <%= turbo_frame_tag dom_id(post, :like) do %>
