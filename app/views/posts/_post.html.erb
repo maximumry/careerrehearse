@@ -1,0 +1,34 @@
+<!-- 新規投稿フォーム -->
+<div class="form-container">
+  <%= form_with(model: post, local: true) do |f|%>
+    <div class="error-messages">
+      <%= render "shared/error_messages", model: f.object %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :video %>
+      <%= f.file_field :video %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, placeholder: "タイトルを入力" %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :description, "説明" %>
+      <%= f.text_area :description, placeholder: "説明を入力" %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :industry_id, "業種" %>
+      <%= f.collection_select(:industry_id, Industry.all, :id, :name, {}, {class: 'select-field'}) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "送信", class: "submit-btn" %>
+    </div>
+  <% end %>
+</div>
+
+<%# direct_upload: true これはf.file_fieldに追記する。ストレージサービスを使うときにこれで先にストレージサービスにアップロードされる %>
