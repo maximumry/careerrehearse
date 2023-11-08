@@ -14,4 +14,12 @@ class Post < ApplicationRecord
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
+
+  def self.search(search)
+    if search != ""
+      Post.where('description LIKE(?) OR title LIKE(?)', "%#{search}%", "%#{search}%").order("created_at DESC")
+    else
+      Post.all
+    end
+  end
 end
