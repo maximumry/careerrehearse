@@ -222,3 +222,13 @@ a:hover {
 .form-container input[type="submit"]:hover {
   background-color: #0056b3; /* 暗い青色に変更 */
 }
+
+.video-container {
+  width: 100%; /* コンテナの幅に合わせます */
+  max-width: 100%; /* 最大幅を親の幅に制限します */
+}
+
+.video-responsive {
+  width: 100%; /* 動画が親コンテナの幅に基づいて調整されるようにします */
+  height: auto; /* 高さは自動的に調整されます */
+}
