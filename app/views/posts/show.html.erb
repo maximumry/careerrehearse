@@ -1,32 +1,51 @@
-<% if @post.video.attached? %>
-  <p><%= video_tag(rails_blob_path(@post.video), controls: true, style: "max-width: 500px;") %></p>
-<% end %>
-<p><%= @post.title %></p>
-<p><%= @post.description %></p>
-<p><%= @post.industry.name %></p>
-<p><%= link_to "投稿の編集", edit_post_path(@post.id) %></p>
-<p><%= link_to "投稿の削除", post_path(@post.id), data: { turbo_method: :delete } %></p>
-<div id="like-btn<%= @post.id %>">
-  <%= turbo_frame_tag dom_id(@post, :like) do %>
-    <% if user_signed_in? && @post.liked_by?(current_user)%>
-      <%=link_to "いいね済", post_likes_path(@post.id), data: { turbo_method: :delete } %>
-    <% else %>
-      <%=link_to "いいね", post_likes_path(@post.id), data: { turbo_method: :post } %>
-    <% end %>
+<div class="form-container">
+  <% if @post.video.attached? %>
+    <div class="video-container">
+      <%= video_tag(rails_blob_path(@post.video), controls: true, class: "video-responsive") %>
+    </div>
   <% end %>
-</div>
-  <p><%= link_to @post.user.username, user_path %></p>
 
-  <div>
-    <% if user_signed_in? %>
-      <%= form_with(model: [@post, @comment], local: true) do |f| %>
-        <%= f.text_area :content, placeholder: "コメントする", rows: "2" %>
-        <%= f.submit "送信" %>
+  
+  <h2 class="post-title"><%= @post.title %></h2>
+  <p><%= @post.description %></p>
+  <p class="industry"><%= @post.industry.name %></p>
+
+  <div class="post-actions">
+    <%= link_to "投稿の編集", edit_post_path(@post.id), class: "edit-link" %>
+    <%= link_to "投稿の削除", post_path(@post.id), data: { turbo_method: :delete }, class: "delete-link" %>
+  </div>
+
+  <div id="like-btn<%= @post.id %>" class="like-btn">
+    <%= turbo_frame_tag dom_id(@post, :like) do %>
+      <% if user_signed_in? && @post.liked_by?(current_user)%>
+        <%= link_to "いいね済", post_likes_path(@post.id), data: { turbo_method: :delete }, class: "like-link" %>
+      <% else %>
+        <%= link_to "いいね", post_likes_path(@post.id), data: { turbo_method: :post }, class: "like-link" %>
       <% end %>
     <% end %>
   </div>
-  <div>
+  
+  <p class="username"><%= link_to @post.user.username, user_path(@post.user), class: "user-link" %></p>
+
+  <% if user_signed_in? %>
+    <div class="comment-form">
+      <%= form_with(model: [@post, @comment], local: true) do |f| %>
+        <div class="form-field">
+          <%= f.text_area :content, placeholder: "コメントする", rows: "2" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "送信", class: "submit-btn" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="comments">
     <% @comments.each do |comment| %>
-      <%= comment.user.username %>
-      <%= comment.content %>
+      <div class="comment">
+        <p class="comment-username"><%= comment.user.username %></p>
+        <p class="comment-content"><%= comment.content %></p>
+      </div>
     <% end %>
+  </div>
+</div>
