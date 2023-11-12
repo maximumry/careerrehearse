@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
-<%= render partial: "header" %>
 <header>
   <%= link_to "キャリアリハーサル", root_path %>
   <% if user_signed_in? %>
@@ -8,6 +7,14 @@
   <% else %>
     <p><%= link_to "新規登録", new_user_registration_path %></p>
     <p><%= link_to "ログイン", new_user_session_path %></p>
+  <% end %>
+  <%= search_form_for @q, url: search_posts_path, html: {id: "detailed-search-form"} do |f| %>
+    <div class="search-field">
+      <%= f.label :title_cont, 'タイトル' %>
+      <br>
+      <%= f.text_field :title_cont, placeholder: 'タイトル' %>
+    </div>
+    <%= f.submit '検索' %>
   <% end %>
 </header>
 

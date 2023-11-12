@@ -22,4 +22,8 @@ class Post < ApplicationRecord
       Post.all
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["title", "description", "industry_id"]
+  end
 end
