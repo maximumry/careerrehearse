@@ -10,9 +10,14 @@
   <% end %>
   <%= search_form_for @q, url: search_posts_path, html: {id: "detailed-search-form"} do |f| %>
     <div class="search-field">
-      <%= f.label :title_cont, 'タイトル' %>
+      <%= f.label :user_username_cont, '出品者名' %>
       <br>
-      <%= f.text_field :title_cont, placeholder: 'タイトル' %>
+      <%= f.text_field :user_username_cont, placeholder: '出品者名' %>
+    </div>
+    <div class="search-field">
+      <%= f.label :title, 'タイトル' %>
+      <br>
+      <%= f.text_field :title, placeholder: 'タイトル' %>
     </div>
     <div class="search-field">
       <%= f.label :description_cont, '内容' %>
