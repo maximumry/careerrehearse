@@ -1,6 +1,6 @@
 <!-- 新規投稿フォーム -->
 <div class="form-container">
-  <%= form_with(model: post, local: true) do |f|%>
+  <%= form_with(model: @post_form, url: url, method: method, local: true) do |f|%>
     <div class="error-messages">
       <%= render "shared/error_messages", model: f.object %>
     </div>
