@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
-<%= render partial: "header" %>
 <header>
   <%= link_to "キャリアリハーサル", root_path %>
   <% if user_signed_in? %>
@@ -8,6 +7,29 @@
   <% else %>
     <p><%= link_to "新規登録", new_user_registration_path %></p>
     <p><%= link_to "ログイン", new_user_session_path %></p>
+  <% end %>
+  <%= search_form_for @q, url: search_posts_path, html: {id: "detailed-search-form"} do |f| %>
+    <div class="search-field">
+      <%= f.label :user_username_cont, '出品者名' %>
+      <br>
+      <%= f.text_field :user_username_cont, placeholder: '出品者名' %>
+    </div>
+    <div class="search-field">
+      <%= f.label :title, 'タイトル' %>
+      <br>
+      <%= f.text_field :title, placeholder: 'タイトル', value: params[:q]&.dig(:title) %>
+    </div>
+    <div class="search-field">
+      <%= f.label :description_cont, '内容' %>
+      <br>
+      <%= f.text_field :description_cont, placeholder: '内容' %>
+    </div>
+    <div class="search-field">
+      <%= f.label :industry_id_eq, '業種' %>
+      <br>
+      <%= f.collection_check_boxes(:industry_id_in, Industry.all, :id, :name, {}) %>
+    </div>
+    <%= f.submit '検索' %>
   <% end %>
 </header>
 
