@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
 <%= render partial: "header" %>
+<h3><%= link_to '商品検索', search_posts_path%></h3>
 <div class="post-container">
   <% @posts.each do |post| %>
     <div class="post">
