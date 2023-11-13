@@ -5,13 +5,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post_form = PostForm.new
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save
-      redirect_to root_path
+    @post_form = PostForm.new(post_form_params)
+    if @post_form.valid?
+       @post_form.save
+       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -52,8 +53,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def post_params
-    params.require(:post).permit(:title, :description, :video, :industry_id).merge(user_id: current_user.id)
+  def post_form_params
+    params.require(:post_form).permit(:title, :description, :video, :industry_id).merge(user_id: current_user.id)
   end
 
   def user_match
