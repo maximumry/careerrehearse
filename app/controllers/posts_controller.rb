@@ -25,12 +25,14 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    post_attributes = @post.attributes
+    @post_form = PostForm.new(post_attributes)
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
+    @post_form = PostForm.new(post_form_params, @post)
+    if @post_form.valid?
+      @post_form.update(post_form_params, @post)
       redirect_to post_path(@post.id)
     else
       render :edit, status: :unprocessable_entity
