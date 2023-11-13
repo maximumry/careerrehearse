@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :user_match, only: [:edit, :destroy]
+  before_action :user_match, only: [:edit, :update, :destroy]
   def index
     @posts = Post.order("created_at DESC")
   end
@@ -30,7 +30,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post_form = PostForm.new(post_form_params, @post)
+    @post_form = PostForm.new(post_form_params)
+    @post = Post.find(params[:id])
     if @post_form.valid?
       @post_form.update(post_form_params, @post)
       redirect_to post_path(@post.id)
