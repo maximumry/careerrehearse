@@ -17,7 +17,7 @@
     <div class="search-field">
       <%= f.label :title, 'タイトル' %>
       <br>
-      <%= f.text_field :title, placeholder: 'タイトル' %>
+      <%= f.text_field :title, placeholder: 'タイトル', value: params[:q]&.dig(:title) %>
     </div>
     <div class="search-field">
       <%= f.label :description_cont, '内容' %>
