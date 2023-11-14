@@ -14,7 +14,9 @@
       <%= f.label :title, "タイトル" %>
       <%= f.text_field :title, placeholder: "タイトルを入力" %>
     </div>
-
+    <div class="tag-field">
+      <%= f.text_field :tag_name, placeholder: 'add tags' %>
+    </div>
     <div class="form-field">
       <%= f.label :description, "説明" %>
       <%= f.text_area :description, placeholder: "説明を入力" %>
