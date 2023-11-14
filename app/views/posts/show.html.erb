@@ -25,6 +25,11 @@
       <% end %>
     <% end %>
   </div>
+
+  <tr>
+    <th>タグ</th>
+    <td><%= @post.tags.first&.tag_name %></td>
+  </tr>
   
   <p class="username"><%= link_to @post.user.username, user_path(@post.user), class: "user-link" %></p>
 

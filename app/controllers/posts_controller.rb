@@ -58,7 +58,7 @@ class PostsController < ApplicationController
 
   private
   def post_form_params
-    params.require(:post_form).permit(:title, :description, :video, :industry_id).merge(user_id: current_user.id)
+    params.require(:post_form).permit(:title, :description, :video, :industry_id, :tag_name).merge(user_id: current_user.id)
   end
 
   def user_match
