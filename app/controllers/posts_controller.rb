@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   def edit
     post_attributes = @post.attributes
     @post_form = PostForm.new(post_attributes)
+    @post_form.tag_name = @post.tags.first&.tag_name
   end
 
   def update
