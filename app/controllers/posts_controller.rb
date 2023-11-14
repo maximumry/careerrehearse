@@ -32,6 +32,7 @@ class PostsController < ApplicationController
   def update
     @post_form = PostForm.new(post_form_params)
     @post = Post.find(params[:id])
+    @post_form.video ||= @post.video.blob
     if @post_form.valid?
       @post_form.update(post_form_params, @post)
       redirect_to post_path(@post.id)
