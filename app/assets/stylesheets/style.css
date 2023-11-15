@@ -232,3 +232,15 @@ a:hover {
   width: 100%; /* 動画が親コンテナの幅に基づいて調整されるようにします */
   height: auto; /* 高さは自動的に調整されます */
 }
+
+#search-result{
+  width: 30%;
+}
+
+.child{
+  margin: 5px;
+  border: 1px solid #dedede;
+  background-color: #F4F4F4;
+  padding: 5px;
+  font-size: 12px;
+}

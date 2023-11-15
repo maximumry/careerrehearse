@@ -49,12 +49,9 @@ class PostsController < ApplicationController
   end
 
   def search
-    if params[:q]&.dig(:title)
-      squished_keywords = params[:q][:title].squish
-      params[:q][:title_cont_any] = squished_keywords.split(" ")
-    end
-    @q = Post.ransack(params[:q])
-    @posts = @q.result
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
   end
 
   private
