@@ -30,6 +30,11 @@ class User < ApplicationRecord
       username: auth.info.name,
       email: auth.info.email
     )
+    if user.persisted?
+      sns.user = user
+      sns.save
+    end
+    user
   end
 
   validates :password, length: {minimum: 16, message: "is too short (minimum is 16 characters)"}, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
