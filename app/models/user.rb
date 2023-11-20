@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: :google_oauth2
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :posts
   has_many :comments
@@ -22,6 +22,10 @@ class User < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["username"]
+  end
+
+  def self.from_omniauth(auth)
+    binding.pry
   end
 
   validates :password, length: {minimum: 16, message: "is too short (minimum is 16 characters)"}, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
