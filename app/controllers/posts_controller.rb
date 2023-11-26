@@ -53,6 +53,13 @@ class PostsController < ApplicationController
     @posts = @q.result(distinct: true)
   end
 
+  def search_tag
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
+
   private
   def post_form_params
     params.require(:post_form).permit(:title, :description, :video, :industry_id, :tag_name).merge(user_id: current_user.id)
