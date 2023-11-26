@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
   before_action :user_match, only: [:edit, :update, :destroy]
+  before_action :post_find, only: [:show, :update, :destroy]
   def index
     @posts = Post.order("created_at DESC")
   end
-
+# new 
+# create 
   def new
     @post_form = PostForm.new
   end
@@ -19,7 +21,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:user)
   end
@@ -32,7 +33,6 @@ class PostsController < ApplicationController
 
   def update
     @post_form = PostForm.new(post_form_params)
-    @post = Post.find(params[:id])
     @post_form.video ||= @post.video.blob
     if @post_form.valid?
       @post_form.update(post_form_params, @post)
@@ -43,7 +43,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to root_path
   end
@@ -70,5 +69,9 @@ class PostsController < ApplicationController
     if @post.user != current_user
       redirect_to root_path
     end
+  end
+
+  def post_find
+    @post = Post.find(params[:id])
   end
 end

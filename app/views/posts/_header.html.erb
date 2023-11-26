@@ -7,12 +7,4 @@
     <p><%= link_to "新規登録", new_user_registration_path %></p>
     <p><%= link_to "ログイン", new_user_session_path %></p>
   <% end %>
-  <%= search_form_for Post.ransack(params[:q]), url: search_posts_path, html: {class: "search-form"} do |f| %>
-    <%= f.text_field :title, placeholder: 'タイトルから探す', class: 'input-box' %>
-    <br>
-    <%= f.label :submit, class: "search-button" do %>
-      <input type="submit" value="検索" class="send">
-      <%= f.submit :submit, id: "q_submit", style: "display: none;"%>
-    <% end %>
-  <% end %>
 </header>
