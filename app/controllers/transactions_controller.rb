@@ -9,7 +9,7 @@ class TransactionsController < ApplicationController
       @transaction.save
       redirect_to user_path(@transaction.user)
     else
-      :render :index, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 end
