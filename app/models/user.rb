@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :likes
   has_many :sns_credentials
+  has_many :transactions
 
   has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
   has_many :followings, through: :active_relationships, source: :follower
