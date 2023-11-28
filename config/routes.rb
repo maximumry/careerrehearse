@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     resource :relationships, only: [:create, :destroy]
   end
+  resources :transaction, only: :index
 end
