@@ -1,0 +1,50 @@
+<%= render partial: "posts/header" %>
+<%= form_with model: @transaction, url: "root_path", id: "charge-form", class: 'transaction-form-wrap', local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  <%# カード情報の入力 %>
+  <div class='credit-card-form'>
+    <h1 class='info-input-haedline'>
+      クレジットカード情報入力
+    </h1>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">カード情報</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <div id="number-form" class="input-default"></div>
+      <div class='available-card'>
+        <%= image_tag 'card-visa.gif', class: 'card-logo'%>
+        <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
+        <%= image_tag 'card-jcb.gif', class: 'card-logo'%>
+        <%= image_tag 'card-amex.gif', class: 'card-logo'%>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">有効期限</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <div class='input-expiration-date-wrap'>
+        <div id="expiry-form" class="input-default"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">セキュリティコード</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <div id="cvc-form" class="input-default"></div>
+    </div>
+  </div>
+  <%# /カード情報の入力 %>
+
+  <%# /送金金額 %>
+  <div class="form-group">
+    <div class="price-form">
+      <%= f.text_field :price, class: "price-input", id: "item-price", placeholder: "いくら送る？" %>
+    </div>
+    <div class="text-form">
+      <%= f.text_area :text, class: "text-input", placeholder: "感謝の言葉を送ろう！" %>
+    </div>
+  </div>
+<% end %>
