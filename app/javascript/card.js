@@ -10,7 +10,13 @@ const pay = () => {
   cvcElement.mount('#cvc-form');
   const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) => {
-    console.log("フォーム送信時にイベント発火")
+    payjp.createToken(numberElement).then(function (response){
+      if (response.error){
+      } else {
+        const token = response.id
+        console.log(token)
+      }
+    });
     e.preventDefault();
   });
 };
