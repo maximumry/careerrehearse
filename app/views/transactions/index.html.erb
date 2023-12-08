@@ -1,5 +1,5 @@
 <%= render partial: "posts/header" %>
-<%= form_with model: @transaction, url: "root_path", id: "charge-form", class: 'transaction-form-wrap', local: true do |f| %>
+<%= form_with model: @transaction, url: "root_path", id: "charge-form", class: 'transaction-form-wrap', local: true, data: { turbo: "false"} do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
   <%# カード情報の入力 %>
   <div class='credit-card-form'>
@@ -45,6 +45,9 @@
     </div>
     <div class="text-form">
       <%= f.text_area :text, class: "text-input", placeholder: "感謝の言葉を送ろう！" %>
+    </div>
+    <div class='buy-btn'>
+      <%= f.submit "購入" ,class:"buy-red-btn", id:"button" %>
     </div>
   </div>
 <% end %>
