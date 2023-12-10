@@ -1,5 +1,5 @@
 <%= render partial: "posts/header" %>
-<%= form_with model: @transaction, url: "root_path", id: "charge-form", class: 'transaction-form-wrap', local: true, data: { turbo: "false"} do |f| %>
+<%= form_with model: @transaction, url: "root_path", method: :get, id: "charge-form", class: 'transaction-form-wrap', local: true, data: { turbo: "false"} do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
   <%# カード情報の入力 %>
   <div class='credit-card-form'>
