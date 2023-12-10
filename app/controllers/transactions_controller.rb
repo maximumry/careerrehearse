@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @transaction = Transaction.new(transaction_params)
     if @transaction.vaid?
       @transaction.save
@@ -11,5 +12,10 @@ class TransactionsController < ApplicationController
     else
       render :index, status: :unprocessable_entity
     end
+  end
+
+  private
+  def transaction_params
+    params.require(:transaction).permit(:price, :text).merge(token: params[:token])
   end
 end
