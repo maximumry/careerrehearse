@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   def index
     @transaction = Transaction.new
+    @user = User.find(params[:user_id])
   end
 
   def create
