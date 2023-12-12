@@ -6,7 +6,7 @@
       <%=link_to "フォローする", user_relationships_path(@user.id), data: { turbo_method: :post } %>
     <% end %>
   <% end %>
-  <%= link_to "お礼をする", user_transactions_path(@user.id) %>
+  <%= link_to "お礼をする", user_transactions_path(@user) %>
   <h3>フォロー</h3>
     <% @user.followings.each do |user| %>
       <p><%= link_to user.username, user_path(user.id) %></p>
