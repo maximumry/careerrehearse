@@ -1,7 +1,7 @@
 class Transaction < ApplicationRecord
   belongs_to :user
 
-  attr_accesor :token
+  attr_accessor :token
 
   validates :price, presence: true
   validates :text, presence: true
