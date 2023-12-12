@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
     if @transaction.valid?
       api_pay
       @transaction.save
-      redirect_to user_path(@transaction.user)
+      redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
