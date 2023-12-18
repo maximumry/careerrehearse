@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = User.find(params[:user_id])
     @transaction = Transaction.new(transaction_params)
     if @transaction.valid?
